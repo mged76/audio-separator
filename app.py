@@ -365,21 +365,7 @@ def static_files(filename):
         
     return send_from_directory('static', filename)
 
-if __name__ == '__main__':
-    # Create required directories
-    for folder in ['UPLOAD_FOLDER', 'SEPARATED_FOLDER', 'EXPORT_FOLDER']:
-        os.makedirs(app.config[folder], exist_ok=True)
-        print(f"[INIT] Created directory: {app.config[folder]}")
-    
-    # Print system information
-    print("\n[INIT] System check:")
-    print(f"Python version: {sys.version}")
-    try:
-        ffmpeg_version = subprocess.run(['ffmpeg', '-version'], capture_output=True, text=True)
-        print(f"FFmpeg version: {ffmpeg_version.stdout.splitlines()[0] if ffmpeg_version.returncode == 0 else 'Not available'}")
-    except Exception as e:
-        print(f"FFmpeg version: Not available ({str(e)})")
-    
+if __name__ == "__main__":
     import os
-port = int(os.environ.get("PORT", 5000))
-app.run(host="0.0.0.0", port=port, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
