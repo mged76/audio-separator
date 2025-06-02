@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="upload-container">
+    <div class="upload-box">
+        <h2><i class="icon-upload"></i> رفع ملف صوتي أو فيديو</h2>
+        <div id="dropZone" class="drop-zone">
+            <input type="file" id="fileInput" accept=".mp3,.mp4,.wav">
+            <div class="upload-label">
+                <div class="icon-container">
+                    <i class="icon-cloud-upload"></i>
+                </div>
+                <p>اسحب وأفلت الملف هنا</p>
+                <span>أو</span>
+                <button class="browse-btn">تصفح الملفات</button>
+            </div>
+        </div>
+        <div class="file-info" id="fileInfo"></div>
+    </div>
+
+    <div class="process-section">
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-labels">
+                <span id="progressText">في انتظار الملف...</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill"></div>
+            </div>
+        </div>
+        <button id="processBtn" class="process-btn" disabled>
+            <i class="icon-cogs"></i> بدء فصل المسارات
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/upload.js') }}"></script>
+{% endblock %}

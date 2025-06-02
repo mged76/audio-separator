@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 style="margin-bottom: 1.5rem; color: var(--primary-color);">نتائج فصل المسارات</h2>
+
+    <div class="results-container">
+        <!-- الفيديو -->
+        <div class="video-panel">
+            <div class="video-wrapper">
+                <video id="mainVideo" controls>
+                    <source src="{{ video_url }}" type="video/mp4">
+                    متصفحك لا يدعم تشغيل الفيديو
+                </video>
+            </div>
+        </div>
+
+        <!-- الكنترول -->
+        <div class="tracks-panel">
+            <h2><i class="icon-equalizer"></i> التحكم في المسارات</h2>
+
+            <div class="track-controls">
+                {% for name, url in tracks.items() %}
+                <div class="track" data-track="{{ name }}" data-src="{{ url }}">
+                    <div class="track-header">
+                        <div class="track-icon">
+                            <i class="icon-music"></i>
+                        </div>
+                        <div class="track-name">{{ name }}</div>
+                        <div class="track-actions">
+                            <button class="mute-btn" title="كتم/إلغاء كتم">
+                                <i class="icon-volume-high"></i>
+                            </button>
+                            <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider" title="تحكم في مستوى الصوت">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="export-section">
+                <button id="exportBtn" class="export-btn">
+                    <i class="icon-download"></i> تصدير الفيديو المخصص
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // تأكد أن الكائن AudioEditor يتم تفعيله بعد تحميل كل شيء
+    new AudioEditor();
+});
+</script>
+{% endblock %}
